@@ -13,14 +13,8 @@ import org.springframework.security.config.annotation.web.servlet.configuration.
 @EnableWebSecurity
 @EnableWebMvcSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-	// @Override
-	// protected void configure(HttpSecurity http) throws Exception {
-	// http.authorizeRequests().antMatchers("/", "/home").permitAll()
-	// .anyRequest().authenticated().and().formLogin()
-	//
-	// .and().logout().permitAll();
-	// }
 
+	// API采用httpBasic认证
 	@Configuration
 	@Order(1)
 	public static class ApiWebSecurityConfigurationAdapter extends
@@ -31,6 +25,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		}
 	}
 
+	// WEBUI采用form认证
 	@Configuration
 	@Order(2)
 	public static class FormLoginWebSecurityConfigurerAdapter extends
@@ -44,6 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		}
 	}
 
+	// 内存认证账户设置
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth)
 			throws Exception {
